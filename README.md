@@ -1,4 +1,6 @@
-![HONEYPOT-Logo](/assets/images/honeypot4.png)
+<p align="center">
+  <img src="/assets/images/honeypot4.png" alt="HONEYPOT-Logo" style="opacity:0.5; width: auto; height: auto;">
+</p>
 
 A flexible, visually-oriented honeypot designed to monitor and log IP addresses, usernames, passwords, and commands from various protocols, with current support for SSH and HTTP. Built using Python.
 
