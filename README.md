@@ -49,9 +49,9 @@ Basic Usage
 
 HoneyLogix needs the following parameters to start:
 
-    Bind Address (-a): The IP address to bind the honeypot to. Use 0.0.0.0 to listen on all network interfaces.
-    Port (-p): The network port the honeypot will listen on.
-    Honeypot Type (-s or -wh): Specify the type of honeypot, such as SSH or HTTP.
+Bind Address (-a): The IP address to bind the honeypot to. Use 0.0.0.0 to listen on all network interfaces.
+Port (-p): The network port the honeypot will listen on.
+Honeypot Type (-s or -wh): Specify the type of honeypot, such as SSH or HTTP.
 
 Example command:
 
@@ -67,9 +67,9 @@ For changing the default SSH port, consult Hostinger's How to Change the SSH Por
 
 HoneyLogix allows for further customization with the following optional parameters:
 
-    Username (-u): Specifies a particular username for SSH authentication. If not provided, the honeypot will accept any username.
+Username (-u): Specifies a particular username for SSH authentication. If not provided, the honeypot will accept any username.
 
-    Example:
+Example:
 
 ```
 -u admin
