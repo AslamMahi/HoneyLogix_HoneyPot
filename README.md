@@ -42,64 +42,99 @@ Generate an RSA key for the SSH server host key. Make sure the key is named serv
 ssh-keygen -t rsa -b 2048 -f server.key
 ```
 
-# Usage
+# Running HoneyLogix
 
-To start a new instance of HoneyLogix, use the `honeypot.py` file. This is the main file to interface with for HoneyLogix.
+To launch HoneyLogix, execute the honeypot.py file, which is the primary interface for managing the honeypot.
+Basic Usage
 
-HoneyLogix requires a bind IP address (`-a`) and network port to listen on (`-p`). Use `0.0.0.0` to listen on all network interfaces. Also, specify the protocol type.
+HoneyLogix needs the following parameters to start:
 
-```
--a / --address: Bind address.
--p / --port: Port.
--s / --ssh OR -wh / --http: Declare honeypot type.
-```
+    Bind Address (-a): The IP address to bind the honeypot to. Use 0.0.0.0 to listen on all network interfaces.
+    Port (-p): The network port the honeypot will listen on.
+    Honeypot Type (-s or -wh): Specify the type of honeypot, such as SSH or HTTP.
 
-Example: `python3 honeypot.py -a 0.0.0.0 -p 22 --ssh`
+Example command:
 
-💡 If HoneyLogix is set to listen on a privileged port (22), run the program with `sudo` or root privileges. Ensure no other services are using the specified port.
-
-If port 22 is used for listening, change the default SSH port. Refer to Hostinger's "[How to Change the SSH Port](https://www.hostinger.com/tutorials/how-to-change-ssh-port-vps)" guide.
-
-**Optional Arguments**
-
-Specify a username (`-u`) and password (`-w`) for SSH server authentication. By default, the configuration accepts all usernames and passwords.
-
-
-```
--u / --username: Username.
--w / --password: Password.
--t / --tarpit: For SSH-based honeypots, -t can be used to trap sessions inside the shell, by sending a 'endless' SSH banner.
+```bash
+python3 honeypot.py -a 0.0.0.0 -p 22 --ssh
 ```
 
-Example: `python3 honeypot.py -a 0.0.0.0 -p 22 --ssh -u admin -w admin --tarpit`
+Note: If you choose to listen on a privileged port (like 22), you may need to run the script with sudo or as the root user. Ensure that no other services are using the same port.
 
-# Logging Files
+For changing the default SSH port, consult Hostinger's How to Change the SSH Port guide.
 
-HoneyLogix has three loggers configured. Logs will be routed to `cmd_audits.log`, `creds_audits.log` (for SSH), and `http_audit.log` (for HTTP) for capturing information.
+## Additional Configuration Options
 
-`cmd_audits.log`: Captures IP address, username, password, and all commands supplied.
+HoneyLogix allows for further customization with the following optional parameters:
 
-`creds_audits.log`: Captures IP address, username, and password, comma-separated. Used to track how many hosts attempt to connect to HoneyLogix.
+    Username (-u): Specifies a particular username for SSH authentication. If not provided, the honeypot will accept any username.
 
-`http_audit.log`: Captures IP address, username, and password.
+    Example:
 
-# Honeypot Types
+```
+-u admin
 
-HoneyLogix was designed with modularity in mind to support various honeypot types (Telnet, HTTPS, SMTP, etc). Currently, two honeypot types are supported.
+```
+Password (-w): Defines a specific password for SSH authentication. By default, the honeypot accepts any password.
 
-## SSH
-HoneyLogix initially supports SSH. Follow the instructions above to set up an SSH-based honeypot that emulates a basic shell.
+Example:
 
-💡 `-t / --tarpit`: A tarpit slows down or delays attackers trying to brute-force login credentials. Using Python's time module, a long SSH banner is sent to the connecting shell session. The only way out is to close the terminal.
+```
+-w password123
+```
+Tarpit (-t): Used with SSH honeypots to trap sessions within the shell. This option sends an 'endless' SSH banner, effectively keeping the connection open and preventing the session from completing.
 
-## HTTP
-HoneyLogix uses Python Flask to create a simple web service, impersonating a default WordPress `wp-admin` login page. Username/password pairs are collected.
+Example:
 
-Default credentials `admin` and `deeboodah` will trigger a Rick Roll gif. Username and password can be changed using the `-u / --username` and `-w / --password` arguments.
+```
+-t
+```
 
-The web-based honeypot runs on port 5000 by default. This can be adjusted with the `-p / --port` flag.
+Example Usage
 
-💡 Currently, there is no dashboard for HTTP-based results. This will be a future addition.
+Combining these options, you can configure HoneyLogix to listen on a specific port with designated credentials and session handling:
+
+```bash
+python3 honeypot.py -a 0.0.0.0 -p 22 --ssh -u admin -w password123 -t
+```
+
+In this example:
+
+    The honeypot listens on all network interfaces (0.0.0.0) on port 22.
+    It uses SSH as the honeypot type.
+    It requires the username admin and password password123.
+    It traps sessions using the -t option.
+
+# Log Management
+
+HoneyLogix generates three types of log files to capture different aspects of interactions:
+
+    cmd_audits.log: This file records detailed information about SSH interactions, including the IP address, username, password, and all commands executed. It provides a comprehensive view of the commands attempted by attackers.
+
+    creds_audits.log: This log file captures connection attempts and authentication details, including IP address, username, and password, in a comma-separated format. It helps track the volume and details of connection attempts to HoneyLogix.
+
+    http_audit.log: Used for HTTP honeypots, this file logs IP address, username, and password. It provides insights into HTTP-based interactions and authentication attempts.
+
+## Supported Honeypot Types
+
+HoneyLogix is designed with modularity to accommodate different honeypot types. Currently, it supports the following types:
+
+### SSH Honeypot
+
+The SSH honeypot simulates an SSH service, providing a basic shell environment to interact with potential attackers.
+
+- **Tarpit Mode (`-t`)**: When enabled, this mode introduces delays to hinder attackers attempting brute-force attacks. It uses Python's time module to send an extended SSH banner, trapping the connection until the attacker closes the terminal.
+
+### HTTP Honeypot
+
+The HTTP honeypot uses Python Flask to simulate a web service, specifically a default WordPress `wp-admin` login page, to capture login attempts.
+
+- **Default Credentials**: The default username and password are `admin` and `deeboodah`, respectively. Logging in with these credentials will trigger a Rick Roll GIF.
+- **Custom Credentials**: You can set your own username and password using the `-u / --username` and `-w / --password` options.
+
+The HTTP honeypot listens on port 5000 by default, but this can be customized with the `-p / --port` flag.
+
+**Note**: A dedicated dashboard for viewing HTTP honeypot results is not yet available but is planned for future updates.
 
 # Dashboard
 
