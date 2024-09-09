@@ -73,20 +73,19 @@ Example:
 
 ```
 -u admin
-
 ```
 Password (-w): Defines a specific password for SSH authentication. By default, the honeypot accepts any password.
 
 Example:
 
-```
+```bash
 -w password123
 ```
 Tarpit (-t): Used with SSH honeypots to trap sessions within the shell. This option sends an 'endless' SSH banner, effectively keeping the connection open and preventing the session from completing.
 
 Example:
 
-```
+```bash
 -t
 ```
 
@@ -109,11 +108,11 @@ In this example:
 
 HoneyLogix generates three types of log files to capture different aspects of interactions:
 
-    cmd_audits.log: This file records detailed information about SSH interactions, including the IP address, username, password, and all commands executed. It provides a comprehensive view of the commands attempted by attackers.
+cmd_audits.log: This file records detailed information about SSH interactions, including the IP address, username, password, and all commands executed. It provides a comprehensive view of the commands attempted by attackers.
 
-    creds_audits.log: This log file captures connection attempts and authentication details, including IP address, username, and password, in a comma-separated format. It helps track the volume and details of connection attempts to HoneyLogix.
+creds_audits.log: This log file captures connection attempts and authentication details, including IP address, username, and password, in a comma-separated format. It helps track the volume and details of connection attempts to HoneyLogix.
 
-    http_audit.log: Used for HTTP honeypots, this file logs IP address, username, and password. It provides insights into HTTP-based interactions and authentication attempts.
+http_audit.log: Used for HTTP honeypots, this file logs IP address, username, and password. It provides insights into HTTP-based interactions and authentication attempts.
 
 ## Supported Honeypot Types
 
