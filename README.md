@@ -4,29 +4,43 @@
 
 A flexible, visually-oriented honeypot designed to monitor and log IP addresses, usernames, passwords, and commands from various protocols, with current support for SSH and HTTP. Built using Python.
 
-# Install
+# HoneyLogix Setup Instructions
 
-**1) Clone the repository.**
-`git clone https://github.com/AslamMahi/HoneyLogix_HoneyPot.git`
+## 1. Clone the Repository
 
-**2) Permissions.**
-Navigate to the `HoneyLogix_HoneyPot` directory.
+```bash
+git clone https://github.com/AslamMahi/HoneyLogix_HoneyPot.git
 
-Ensure `main.py` has the correct permissions. (`chmod 755 main.py`)
+```
 
-**3) Key Generation.**
+## 2. Set Permissions
 
-Create a new folder `static`. 
+Ensure `main.py` has the appropriate permissions:
 
-`mkdir static`
+```bash
+cd HoneyLogix_HoneyPot
+chmod 755 main.py
+```
 
-Navigate into this directory.
+## 3. Generate SSH Key
 
-`cd static`
+Create a new directory named `static`:
 
-Generate an RSA key for the SSH server host key. Ensure the key is named `server.key` and is located in the same directory as the main program.
+```bash
+mkdir static
+```
 
-`ssh-keygen -t rsa -b 2048 -f server.key`
+Move into this directory:
+
+```bash
+cd static
+```
+
+Generate an RSA key for the SSH server host key. Make sure the key is named server.key and is located in the static directory:
+
+```bash
+ssh-keygen -t rsa -b 2048 -f server.key
+```
 
 # Usage
 
