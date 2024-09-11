@@ -143,7 +143,7 @@ Run `python3 web_app.py` on localhost. The default port for Python Dash is `8050
 
 HoneyLogix uses Python Dash for charts, Dash Bootstrap Components for dark-theme styling, and Pandas for data parsing.
 
-<img src="/assets/images/Dashboard.png" alt="Dashboard" width="600"/>
+<img src="/assets/images/Dashboard1.png" alt="Dashboard" width="600"/>
 
 # VPS Hosting (General Tips)
 
