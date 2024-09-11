@@ -26,15 +26,15 @@ top_usernames = top_10_calculator(creds_audits_log_df, "username")
 top_passwords = top_10_calculator(creds_audits_log_df, "password")
 top_cmds = top_10_calculator(cmd_audits_log_df, "Command")
 
-# New Theme: MINTY (Bootstrap theme)
-load_figure_template(["minty"])
+# New Dark Theme: CYBORG (Bootstrap theme)
+load_figure_template(["cyborg"])
 dbc_css = ("https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates@V1.0.4/dbc.min.css")
 
 # HONEYPY Logo and Favicon
 image = 'assets/images/honeypot4.png'
 
-# Declare Dash App with MINTY theme
-app = Dash(__name__, external_stylesheets=[dbc.themes.MINTY, dbc_css])
+# Declare Dash App with CYBORG theme
+app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, dbc_css])
 app.title = "HONEYPY"
 app._favicon = "../assets/images/honeypy-favicon.ico"
 
@@ -54,26 +54,26 @@ def country_lookup(country):
 
 # Update Graphs: Resize and add color changes
 fig_ip = px.bar(top_ip_address, x="ip_address", y='count', color_discrete_sequence=["#1F77B4"])
-fig_ip.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250)
+fig_ip.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250, plot_bgcolor='#2C3E50', paper_bgcolor='#2C3E50', font_color='white')
 
 fig_username = px.bar(top_usernames, x='username', y='count', orientation='h', color_discrete_sequence=["#FF7F0E"])
-fig_username.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250)
+fig_username.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250, plot_bgcolor='#2C3E50', paper_bgcolor='#2C3E50', font_color='white')
 
 fig_password = px.bar(top_passwords, x='password', y='count', color_discrete_sequence=["#2CA02C"])
-fig_password.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250)
+fig_password.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250, plot_bgcolor='#2C3E50', paper_bgcolor='#2C3E50', font_color='white')
 
 fig_cmd = px.bar(top_cmds, x='Command', y='count', color_discrete_sequence=["#D62728"])
-fig_cmd.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250)
+fig_cmd.update_layout(margin=dict(l=20, r=20, t=30, b=30), height=250, plot_bgcolor='#2C3E50', paper_bgcolor='#2C3E50', font_color='white')
 
-# Updated Tables: Light color scheme with padding/margins
+# Updated Tables: Dark theme with light text and padding/margins
 tables = html.Div([
         dbc.Row([
             dbc.Col(
                 dash_table.DataTable(
                     data=creds_audits_log_df.to_dict('records'),
                     columns=[{"name": "IP Address", 'id': 'ip_address'}],
-                    style_table={'width': '100%', 'color': 'black', 'padding': '10px'},
-                    style_cell={'textAlign': 'left', 'color': '#2C3E50'},
+                    style_table={'width': '100%', 'color': 'white', 'padding': '10px', 'backgroundColor': '#2C3E50'},
+                    style_cell={'textAlign': 'left', 'color': 'white', 'backgroundColor': '#2C3E50'},
                     style_header={'fontWeight': 'bold', 'backgroundColor': '#3498DB', 'color': 'white'},
                     page_size=10
                 ),
@@ -82,8 +82,8 @@ tables = html.Div([
                 dash_table.DataTable(
                     data=creds_audits_log_df.to_dict('records'),
                     columns=[{"name": "Usernames", 'id': 'username'}],
-                    style_table={'width': '100%', 'padding': '10px'},
-                    style_cell={'textAlign': 'left', 'color': '#2C3E50'},
+                    style_table={'width': '100%', 'padding': '10px', 'backgroundColor': '#2C3E50'},
+                    style_cell={'textAlign': 'left', 'color': 'white', 'backgroundColor': '#2C3E50'},
                     style_header={'fontWeight': 'bold', 'backgroundColor': '#3498DB', 'color': 'white'},
                     page_size=10
                 ),
@@ -92,8 +92,8 @@ tables = html.Div([
                 dash_table.DataTable(
                     data=creds_audits_log_df.to_dict('records'),
                     columns=[{"name": "Passwords", 'id': 'password'}],
-                    style_table={'width': '100%', 'padding': '10px'},
-                    style_cell={'textAlign': 'left', 'color': '#2C3E50'},
+                    style_table={'width': '100%', 'padding': '10px', 'backgroundColor': '#2C3E50'},
+                    style_cell={'textAlign': 'left', 'color': 'white', 'backgroundColor': '#2C3E50'},
                     style_header={'fontWeight': 'bold', 'backgroundColor': '#3498DB', 'color': 'white'},
                     page_size=10
                 ),
@@ -106,21 +106,8 @@ apply_table_theme = html.Div(
     className="dbc"
 )
 
-# Navigation bar at the top with project name "HoneyLogix"
-navbar = dbc.NavbarSimple(
-    brand="HoneyLogix",
-    brand_href="#",
-    color="primary",
-    dark=True,
-    fluid=True,
-    className="mb-4"
-)
-
-# Updated layout with new color scheme, fonts, graph sizes, and shapes
+# Updated layout with dark theme, dark color scheme, fonts, graph sizes, and shapes
 app.layout = dbc.Container([
-    # Navbar at the top
-    navbar,
-    
     # Title with logo
     html.Div([html.Img(src=image, style={'height': '20%', 'width': '20%'})], style={'textAlign': 'center'}, className='dbc'),
     
@@ -141,7 +128,7 @@ app.layout = dbc.Container([
     html.Div([
         html.H3(
             "Intelligence Data", 
-            style={'textAlign': 'center', "font-family": 'Arial, sans-serif', 'font-weight': 'bold', 'color': '#2C3E50'}, 
+            style={'textAlign': 'center', "font-family": 'Arial, sans-serif', 'font-weight': 'bold', 'color': 'white'}, 
         ),
     ]),
 
