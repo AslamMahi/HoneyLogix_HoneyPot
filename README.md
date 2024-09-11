@@ -222,4 +222,6 @@ To run HoneyLogix in the background using Systemd on popular Linux distributions
   - To trap SSH sessions (`-t, --tarpit`) ✔️
 
 
+# Credits
 
+This project is inspired by and incorporates elements from [ssh_honeypy](https://github.com/collinsmc23/ssh_honeypy).
