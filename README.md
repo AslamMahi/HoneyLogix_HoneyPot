@@ -158,45 +158,68 @@ For Linux-based distributions, also open the ports with IP Tables or Unfiltered 
 - `ufw enable`
 - `ufw allow [port]`
 
-# Running in Background With Systemd
+# Running HoneyLogix as a Background Service with Systemd
 
-To run HoneyLogix in the background, you can use Systemd on popular Linux distributions.
+To run HoneyLogix in the background using Systemd on popular Linux distributions, follow these steps:
 
-A template is included in the `systemd` folder of this repository.
+1. **Locate the Systemd Service Template:**
+   - A Systemd service template can be found in the `systemd` folder of this repository.
 
-Supply the required arguments after `honeypot.py` in the configuration. Edit the configuration file as needed.
-- `ExecStart=/usr/bin/python3 /honeypot.py -a 127.0.0.1 -p 22 --ssh`
+2. **Configure the Service:**
+   - Update the `ExecStart` line in the template to match the location and arguments for `honeypot.py`. For example:
+     ```bash
+     ExecStart=/usr/bin/python3 /path/to/honeypot.py -a 127.0.0.1 -p 22 --ssh
+     ```
 
-Copy the `honeypot.service` template file to `/etc/systemd/system`. `cp honeypot.service /etc/systemd/system`.
+3. **Install the Service File:**
+   - Copy the `honeypot.service` template to the Systemd configuration directory:
+     ```bash
+     cp honeypot.service /etc/systemd/system/
+     ```
 
-Reload systemd with the new configuration using `systemctl daemon-reload`.
+4. **Apply the New Configuration:**
+   - Reload Systemd to recognize the new service:
+     ```bash
+     systemctl daemon-reload
+     ```
 
-Enable the `honeypot.service` file with `systemctl enable honeypot.service`.
+5. **Enable the Service:**
+   - Set the service to start automatically on boot:
+     ```bash
+     systemctl enable honeypot.service
+     ```
 
-Start the `honeypot.service` file with `systemctl start honeypot.service`.
+6. **Start the Service:**
+   - Launch the HoneyLogix service:
+     ```bash
+     systemctl start honeypot.service
+     ```
 
-# Future Features
+# Planned Features
 
-- Additional protocol support:
+- **Support for Additional Protocols:**
   - Telnet
-  - HTTP ✅
+  - HTTP ✔️
   - HTTPS
   - SMTP
   - RDP
   - DNS
-- Custom DNS support.
-- Docker support for host-based isolation and deployment.
-- Systemd support for running scripts in the background. ✅
-- Create a basic overview Dashboard. ✅
-- Dynamic Dashboard Updates.
-- Dashboard hosted on a separate host for independent results.
-- Add SSH Banner Tarpit to trap SSH sessions ✅ (`-t, --tarpit`)
 
-# Helpful Resources
+- **Custom DNS Configuration**
 
-Resources and guides used during the development of this project.
+- **Docker Integration:**
+  - For host-based isolation and deployment.
 
-- [Building an SSH Honeypot in Python and Docker](https://securehoney.net/blog/how-to-build-an-ssh-honeypot-in-python-and-docker-part-1.html) 
-- [Building a Python Honeypot to Thwart Cyber Attackers](https://medium.com/@abdulsamie488/deceptive-defense-building-a-python-honeypot-to-thwart-cyber-attackers-2a9d2ced2760)
-- [SSH Honeypot Script](https://gist.github.com/cschwede/3e2c025408ab4af531651098331cce45)
-- [How to Change SSH Port on VPS](https://www.hostinger.com/tutorials/how-to-change-ssh-port-vps)
+- **Systemd Integration:**
+  - For background script execution ✔️
+
+- **Dashboard Enhancements:**
+  - Basic Overview Dashboard ✔️
+  - Dynamic Dashboard Updates
+  - Separate host for independent Dashboard hosting
+
+- **SSH Banner Tarpit:**
+  - To trap SSH sessions (`-t, --tarpit`) ✔️
+
+
+
