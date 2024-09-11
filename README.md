@@ -15,11 +15,11 @@ git clone https://github.com/AslamMahi/HoneyLogix_HoneyPot.git
 
 ## 2. Set Permissions
 
-Ensure `main.py` has the appropriate permissions:
+Ensure `honeypy.py` has the appropriate permissions:
 
 ```bash
 cd HoneyLogix_HoneyPot
-chmod 755 main.py
+chmod 755 honeypy.py
 ```
 
 ## 3. Generate SSH Key
@@ -56,7 +56,7 @@ Honeypot Type (-s or -wh): Specify the type of honeypot, such as SSH or HTTP.
 Example command:
 
 ```bash
-python3 honeypot.py -a 0.0.0.0 -p 22 --ssh
+python3 honeypy.py -a 0.0.0.0 -p 22 --ssh
 ```
 
 Note: If you choose to listen on a privileged port (like 22), you may need to run the script with sudo or as the root user. Ensure that no other services are using the same port.
@@ -132,8 +132,6 @@ The HTTP honeypot uses Python Flask to simulate a web service, specifically a de
 - **Custom Credentials**: You can set your own username and password using the `-u / --username` and `-w / --password` options.
 
 The HTTP honeypot listens on port 5000 by default, but this can be customized with the `-p / --port` flag.
-
-**Note**: A dedicated dashboard for viewing HTTP honeypot results is not yet available but is planned for future updates.
 
 # Dashboard
 

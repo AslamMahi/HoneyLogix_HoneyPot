@@ -15,8 +15,8 @@ base_dir = Path(__file__).parent.parent  # Determines the base directory for log
 server_key = base_dir / 'ssh_honeypy' / 'static' / 'server.key'  # Path to the SSH server's private key.
 
 # Log file paths.
-creds_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'creds_audits.log'  # Log file for storing credentials attempts.
-cmd_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'cmd_audits.log'  # Log file for storing commands executed.
+creds_audits_log_local_file_path = base_dir / 'HoneyLogix_HoneyPot' / 'log_files' / 'creds_audits.log'  # Log file for storing credentials attempts.
+cmd_audits_log_local_file_path = base_dir / 'HoneyLogix_HoneyPot' / 'log_files' / 'cmd_audits.log'  # Log file for storing commands executed.
 
 # SSH Server Host Key.
 host_key = paramiko.RSAKey(filename=server_key)  # Loads the server's private key for SSH.
